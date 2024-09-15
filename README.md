@@ -34,3 +34,5 @@ Etfrag is a feature-rich platform developed using .NET MVC that allows users to 
 - **Application Architecture**: Implemented a clean, scalable architecture using a three-tier approach.
 - **Bootstrap**: Used for creating a responsive and user-friendly interface.
 - **SQL Server**: Experience in database management and querying.
+
+[Watch the demo video](https://drive.google.com/file/d/1Eg41SUjbgyg5CLZhA4h6DAohwTNAmWx-/view?usp=sharingl)
