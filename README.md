@@ -38,8 +38,3 @@ Etfrag is a feature-rich platform developed using .NET MVC that allows users to 
 [Watch the demo video](https://drive.google.com/file/d/1Eg41SUjbgyg5CLZhA4h6DAohwTNAmWx-/view?usp=sharingl)
 
 [Watch seceenshots from the platform](https://drive.google.com/drive/folders/1rWsTkD13BJO68BE9v8jtOQOYcgwlfsqI?usp=sharing)
-
-![Admin Dashboard](https://raw.githubusercontent.com/Amirkhaled-03/Etfrag/main/EtfragApp.PL/wwwroot/Images/bg.jpg/dashboard.png)
-
-
-
