@@ -1,0 +1,94 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-reboot.min.css">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/magnific-popup.css">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/select2.min.css">
+    <link rel="stylesheet" href="~/css/admin.css">
+    <link href="~/lib/font-awesome/css/all.min.css" rel="stylesheet" />
+
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="Dmitry Volkov">
+    <title>@ViewData["Title"]</title>
+
+</head>
+<body>
+    <!-- sidebar -->
+    <div class="sidebar">
+        <!-- sidebar user -->
+        <div class="sidebar__user">
+            @if (User.Identity.IsAuthenticated)
+            {
+                <a asp-action="LogOut" asp-controller="Account" class="">
+                    <span>Sign Out</span>
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                </a>
+            }
+        </div>
+        <!-- end sidebar user -->
+        <!-- sidebar nav -->
+        <ul class="sidebar__nav">
+            <li class="m-4">
+                <div class="d-inline text-primary">
+                    <i class="fa-solid fa-house text-primary"></i>
+                    <a asp-action="index" asp-controller="Admin" class=""><span>Dashboard</span></a>
+                </div>
+            </li>
+
+            <li class="m-4">
+                <div class="d-inline text-white">
+                    <i class="fa-solid fa-film text-white"></i>
+                    <a asp-action="index" asp-controller="Movie" class="text-white"><span>Movies</span></a>
+                </div>
+            </li>
+
+            <li class="m-4">
+                <div class="d-inline text-primary">
+                    <i class="fa-solid fa-tv text-white"></i>
+                    <a asp-action="index" asp-controller="TVSeries" class="text-white"><span>TV Series</span></a>
+                </div>
+            </li>
+            <li class="m-4">
+                <div class="d-inline text-white">
+                    <i class="fa-solid fa-masks-theater"></i>
+                    <a asp-action="Index" asp-controller="Actors" class="text-white"> <span>Actors</span></a>
+                </div>
+            </li>
+
+            <li class="m-4">
+                <div class="d-inline text-white">
+                    <i class="fa-solid fa-table-cells-large text-white"></i>
+                    <a asp-action="Index" asp-controller="Category" class="text-white"> <span>Categories</span></a>
+                </div>
+            </li>
+        </ul>
+        <!-- end sidebar nav -->
+        <!-- sidebar copyright -->
+        <div class="sidebar__copyright">© Etfrag 2024.</div>
+        <!-- end sidebar copyright -->
+    </div>
+    <!-- end sidebar -->
+    @RenderBody()
+    <!-- end main content -->
+    <!-- JS -->
+    <script src="~/js/jquery-3.5.1.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/js/smooth-scrollbar.js"></script>
+    <script src="~/js/select2.min.js"></script>
+    <script src="~/js/site.js"></script>
+    <script src="~/js/test.js"></script>
+    <script src="~/js/admin1.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>

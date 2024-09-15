@@ -1,0 +1,264 @@
+﻿@model DashboardVM
+
+@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<main class="main">
+    <div class="container-fluid">
+
+        <h1>@ViewBag.Acctors</h1>
+        <div class="row">
+            <div class="col-12">
+                <div class="main__title">
+                    <h2>Dashboard</h2>
+                    <a asp-action="Create" asp-controller="Movie" class="main__title-link">Add Movie</a>
+                    <a asp-action="Create" asp-controller="TVSeries" class="main__title-link">Add TV Series</a>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-xl-3">
+                <div class="stats">
+                    <span>Total Movies</span>
+                    <p>@Model.TotalMovies</p>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-xl-3">
+                <div class="stats">
+                    <span>Total TVSeries</span>
+                    <p>@Model.TotalTVSeries</p>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-xl-3">
+                <div class="stats">
+                    <span>Total Actors</span>
+                    <p>@Model.TotalActors</p>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-xl-3">
+                <div class="stats">
+                    <span>Total Categories</span>
+                    <p>@Model.TotatalCategories</p>
+                </div>
+            </div>
+
+            <div class="col-12 col-xl-6">
+                <div class="dashbox">
+                    <div class="dashbox__title">
+                        <h3> <i class="fa-solid fa-tv px-2 text-primary"></i>Latest TVSeries</h3>
+                        <div class="dashbox__wrap">
+                            <a class="dashbox__refresh" href="#">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21,11a1,1,0,0,0-1,1,8.05,8.05,0,1,1-2.22-5.5h-2.4a1,1,0,0,0,0,2h4.53a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4.77A10,10,0,1,0,22,12,1,1,0,0,0,21,11Z" /></svg></a>
+                            <a class="dashbox__more" asp-action="Index" asp-controller="TVSeries" >View All</a>
+                        </div>
+                    </div>
+
+                    <div class="dashbox__table-wrap dashbox__table-wrap--1">
+                        <table class="main__table main__table--dash">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>TITLE</th>
+                                    <th>ADDED AT</th>
+                                </tr>
+                            </thead>
+                            @if (Model.TVSeries != null)
+                            {
+                                <tbody>
+                                    @foreach (var item in Model.TVSeries)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <div class="main__table-text">@item.Id</div>
+                                            </td>
+                                            <td>
+                                                <div class="main__table-text"><a href="#">@FormatterHelper.CapitalizeFirstLetter(item.Title)</a></div>
+                                            </td>
+
+                                            <td>
+                                                <div class="main__table-text main__table-text--green">@FormatterHelper.GetFormatedDate(item.AddedAt)</div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            }
+                            else
+                            {
+                                <div class="alert alert-info" role="alert">
+                                    There is NO Movies
+                                </div>
+                            }
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-xl-6">
+                <div class="dashbox">
+                    <div class="dashbox__title">
+                        <h3>
+                            <i class="fa-solid fa-film px-2 text-primary"></i>
+                            Latest Movies</h3>
+
+                        <div class="dashbox__wrap">
+                            <a class="dashbox__refresh" href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21,11a1,1,0,0,0-1,1,8.05,8.05,0,1,1-2.22-5.5h-2.4a1,1,0,0,0,0,2h4.53a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4.77A10,10,0,1,0,22,12,1,1,0,0,0,21,11Z" /></svg></a>
+                            <a class="dashbox__more" asp-action="Index" asp-controller="Movie" >View All</a>
+                        </div>
+                    </div>
+
+                    <div class="dashbox__table-wrap dashbox__table-wrap--2">
+                        <table class="main__table main__table--dash">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>TITLE</th>
+                                    <th>ADDEDAT</th>
+                                </tr>
+                            </thead>
+                            @if (Model.Movies != null)
+                            {
+                                <tbody>
+                                    @foreach (var movie in Model.Movies)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <div class="main__table-text">@movie.Id</div>
+                                            </td>
+                                            <td>
+                                                <div class="main__table-text"><a href="#">@FormatterHelper.CapitalizeFirstLetter(movie.Title)</a></div>
+                                            </td>
+                                          
+                                            <td>
+                                                <div class="main__table-text main__table-text--green">@FormatterHelper.GetFormatedDate(movie.AddedAt)</div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            }
+                            else
+                            {
+                                <div class="alert alert-info" role="alert">
+                                    There is NO Movies
+                                </div>
+                            }
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-xl-6">
+                <div class="dashbox">
+                    <div class="dashbox__title">
+                        <h3> <i class="fa-solid fa-masks-theater text-primary px-2"></i> Latest Actors</h3>
+
+                        <div class="dashbox__wrap">
+                            <a class="dashbox__refresh" href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21,11a1,1,0,0,0-1,1,8.05,8.05,0,1,1-2.22-5.5h-2.4a1,1,0,0,0,0,2h4.53a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4.77A10,10,0,1,0,22,12,1,1,0,0,0,21,11Z" /></svg></a>
+                            <a class="dashbox__more" asp-action="Index" asp-controller="Actors" >View All</a>
+                        </div>
+                    </div>
+
+                    <div class="dashbox__table-wrap dashbox__table-wrap--3">
+                        <table class="main__table main__table--dash">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>FULL NAME</th>
+                                    <th>TOTAL WORKS</th>
+                                    <th>NATIONALITY</th>
+                                </tr>
+                            </thead>
+                            @if (Model.Actors != null)
+                            {
+                                <tbody>
+                                    @foreach (var actor in Model.Actors)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <div class="main__table-text">@actor.Id</div>
+                                            </td>
+                                            <td>
+                                                <div class="main__table-text"><a href="#">@actor.FirstName @actor.LastName</a></div>
+                                            </td>
+                                            <td>
+                                                <div class="main__table-text main__table-text--grey">@(actor.TotalFilmsInSite + actor.TotalSeriesInSite)</div>
+                                            </td>
+                                            <td>
+                                                <div class="main__table-text">@FormatterHelper.GetFormatedDate(actor.AddedAt)</div>
+                                            </td>
+                                        </tr>
+
+                                    }
+                                </tbody>
+                            }
+                            else
+                            {
+                                <div class="alert alert-info" role="alert">
+                                    There is NO Actors
+                                </div>
+                            }
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-xl-6">
+                <div class="dashbox">
+                    <div class="dashbox__title">
+                        <h3>  <i class="fa-solid fa-table-cells-large text-primary px-2"></i> Latest Categories</h3>
+                        <div class="dashbox__wrap">
+                            <a class="dashbox__refresh" href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21,11a1,1,0,0,0-1,1,8.05,8.05,0,1,1-2.22-5.5h-2.4a1,1,0,0,0,0,2h4.53a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4.77A10,10,0,1,0,22,12,1,1,0,0,0,21,11Z" /></svg></a>
+                            <a asp-action="Index" asp-controller="Category" class="dashbox__more">View All</a>
+                        </div>
+                    </div>
+
+                    <div class="dashbox__table-wrap dashbox__table-wrap--4">
+                        <table class="main__table main__table--dash">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>CATEGORY NAME</th>
+                                    <th>TOTAL WORKS</th>
+                                    <th>ADDED AT</th>
+                                </tr>
+                            </thead>
+                            @if (Model.Categories.Any())
+                            {
+                                <tbody>
+                                    @foreach (var category in Model.Categories)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <div class="main__table-text"> @category.CategoryId</div>
+                                            </td>
+                                            <td>
+                                                <div class="main__table-text"><a href="#">@category.CategoryName</a></div>
+                                            </td>
+                                            <td>
+                                                <div class="main__table-text">@(category.TotalSeriesInThisCategory + category.TotalFilmsInThisCategory)</div>
+                                            </td>
+                                            <td>
+                                                <div class="main__table-text">@FormatterHelper.GetFormatedDate(category.AddedAt) </div>
+                                            </td>
+
+                                        </tr>
+                                    }
+                                </tbody>
+                            }
+                            else
+                            {
+                                <div class="alert alert-info" role="alert">
+                                    There is NO Categories
+                                </div>
+                            }
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+

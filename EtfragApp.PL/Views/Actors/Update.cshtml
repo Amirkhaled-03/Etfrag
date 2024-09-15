@@ -1,0 +1,19 @@
+﻿@model ActorVM
+
+@{
+    ViewData["Title"] = "Edit Actor";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+<div id="modal-update" class="zoom-anim-dialog modal" style="background-color: #131720">
+    <h6 class="modal__title">Update Actor</h6>
+    <div>
+        <form asp-action="Update" asp-controller="Actors" class="sign__form" enctype="multipart/form-data">
+            <partial name="PartialViews\CreateUpdatePartialView.cshtml" model="@Model"/>
+            <partial name="~/Views/Shared/_AddDismissButtonsPartialView.cshtml" />
+        </form>
+    </div>
+
+</div>

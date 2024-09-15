@@ -1,0 +1,18 @@
+﻿@model CategoryVM
+
+@{
+    ViewData["Title"] = "Edit Category";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div id="modal-update" class="zoom-anim-dialog modal" style="background-color: #131720">
+    <h6 class="modal__title">Update Category</h6>
+    <div>
+        <form asp-action="Update" asp-controller="Category" class="sign__form">
+            <partial name="PartialViews\CreateUpdatePartialView.cshtml" model="@Model"/>
+            <partial name="~/Views/Shared/_AddDismissButtonsPartialView.cshtml" />
+        </form>
+    </div>
+
+</div>

@@ -1,0 +1,139 @@
+﻿@model PageDataVM<CategoryTableVM>
+@{
+    ViewData["Title"] = "All Categories";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<main class="main">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- main title -->
+            <div class="col-12">
+                <div class="col-12">
+                    <div class="main__title">
+                        <h2>Categories</h2>
+                        <span class="main__title-stat">@Model.TotalRecords total</span>
+                        <div class="main__title-wrap">
+                            <div class="px-4">
+                                <a asp-action="Create" asp-controller="Category" type="button" class="main__title-link" id="add-Category-btn">Add Category</a>
+                            </div>
+
+                            <div class="filter" id="filter__sort">
+                                <span class="filter__item-label">Sort by:</span>
+
+                                <div class="filter__item-btn dropdown-toggle" role="navigation" id="filter-sort" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <input type="button" value="Date created">
+                                    <span></span>
+                                </div>
+
+                                <ul class="filter__item-menu dropdown-menu scrollbar-dropdown" aria-labelledby="filter-sort">
+                                    <li>Name</li>
+                                    <li>Created Date</li>
+                                </ul>
+                            </div>
+                            <form asp-action="Index" asp-controller="Category" class="main__title-form">
+                                <input type="text" name="searchValue" value="@ViewData["SearchValue"]" placeholder="Find Category..">
+                                <button type="button">
+                                    <i class="fa-solid fa-magnifying-glass text-white"></i>
+                                </button>
+                            </form>
+                            <div class="px-4">
+                                <a asp-action="Index" asp-controller="Category" type="button" class="main__title-link" id="add-actor-btn">Clear Search</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                @if (Model.Data.Any())
+                {
+                    <div class="col-12">
+                        <div class="main__table-wrap">
+                            <table class="main__table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>CATEGOTY NAME</th>
+                                        <th>TOTAL FILMS IN THIS CATEGORY</th>
+                                        <th>TOTAL SERIES IN THIS CATEGORY</th>
+                                        <th>CRAETED DATE</th>
+                                        <th>ACTIONS</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+
+                                    @foreach (var category in Model.Data)
+                                    {
+                                        <tr>
+
+                                            <td>
+                                                <div class="main__table-text">@category.CategoryId</div>
+                                            </td>
+
+                                            <td>
+                                                <div class="main__table-text">@FormatterHelper.CapitalizeFirstLetter(category.CategoryName)</div>
+                                            </td>
+
+                                            <td>
+                                                <div class="main__table-text">@category.TotalFilmsInThisCategory</div>
+                                            </td>
+
+                                            <td>
+                                                <div class="main__table-text">@category.TotalSeriesInThisCategory</div>
+                                            </td>
+
+                                            <td>
+                                                <div class="main__table-text">@FormatterHelper.GetFormatedDate(category.AddedAt)</div>
+                                            </td>
+                                            <td>
+                                                <div class="main__table-btns">
+
+                                                    <a asp-action="Update" asp-controller="Category" asp-route-id="@category.CategoryId" class="main__table-btn main__table-btn--edit" style="text-decoration:none">
+                                                        <i class="fa-solid fa-pen" style="color: #74C0FC;"></i>
+                                                    </a>
+                                                    <a asp-action="Delete" asp-controller="Category" asp-route-id="@category.CategoryId" class="main__table-btn main__table-btn--delete">
+                                                        <i class="fa-regular fa-trash-can" style="color:red"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- paginator -->
+                    <div class="col-12">
+                        <div class="paginator">
+                            <span class="paginator__pages">@(Model.Data.Count * Model.PageNumber) from @Model.TotalRecords</span>
+
+                            <ul class="paginator__paginator">
+                                <li>
+                                    <a href="#">
+                                        <svg width="14" height="11" viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.75 5.36475L13.1992 5.36475" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M5.771 10.1271L0.749878 5.36496L5.771 0.602051" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                                    </a>
+                                </li>
+                                @for (int i = 1; i <= (int)Math.Ceiling((double)Model.TotalRecords / Model.PageSize); i++)
+                                {
+                                    <li class="@ViewHelper.IsActive(i, Model.PageNumber)"><a asp-action="Index" asp-controller="Actors" asp-route-pageNo="@(i)">@i</a></li>
+                                }
+                                <li>
+                                    <a href="#">
+                                        <svg width="14" height="11" viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.1992 5.3645L0.75 5.3645" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M8.17822 0.602051L13.1993 5.36417L8.17822 10.1271" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- end paginator -->
+                }
+                else
+                {
+                    <div class="alert alert-warning" role="alert">
+                        There is No Categories in the system
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</main>

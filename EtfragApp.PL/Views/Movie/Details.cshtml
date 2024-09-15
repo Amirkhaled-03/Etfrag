@@ -1,0 +1,75 @@
+﻿
+@model DetailsMovieDto
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<!-- details -->
+@if (User.Identity.IsAuthenticated)
+{
+    <section class="section ">
+        <div class="container my-4">
+            <!-- article -->
+            <div class="article  ">
+                <div class="row">
+                    <div class="col-12 col-xl-8">
+                        <!-- article content -->
+                        <div class="article__content">
+                            <h1>@Model.Title</h1>
+                            <ul class="list">
+                                <li>@Model.categories[0]</li>
+                                <li>@Model.ReleasYear</li>
+                                <li>@Model.Duration min</li>
+                            </ul>
+
+                            <p>@Model.Description</p>
+                        </div>
+                        <!-- end article content -->
+                    </div>
+
+                    <!-- video player -->
+                    <div class="col-12 col-xl-8">
+                        <video controls playsinline poster="~/Files/Covers/@Model.CoverImageUrl" id="player">
+                            <!-- Video files -->
+                            <source src="~/Files/Videos/@Model.VideoURl" type="video/mp4" size="576">
+                       
+                        </video>
+                            
+                        <div class="article__actions article__actions--details">
+                            <div class="article__download">
+                                <i class="fa-solid fa-download px-2 text-primary"></i>
+                                Download:
+                                <a href="#" download="#">480p</a>
+                                <a href="#" download="#">720p</a>
+                                <a href="#" download="#">1080p</a>
+                                <a href="#" download="#">4k</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end video player -->
+                    <div class="col-12 col-xl-8">
+                        <!-- categories -->
+                        <div class="categories">
+                            <h3 class="categories__title">Genres</h3>
+                            @foreach (string category in Model.categories)
+                            {
+                                <a href="category.html" class="categories__item">@category</a>
+                            }
+                        </div>
+                        <!-- end categories -->
+                    </div>
+                </div>
+
+            </div>
+            <!-- end article -->
+        </div>
+    </section>
+}
+else
+{
+    <div class="text-center text-white">
+        <h3>Register first to watch the movie</h3>
+        <a asp-action="SignUp" , asp-controller="Account">Register Now</a>
+
+    </div>
+}

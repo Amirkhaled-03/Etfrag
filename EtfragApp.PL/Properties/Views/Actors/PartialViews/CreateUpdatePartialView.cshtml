@@ -1,0 +1,43 @@
+﻿@model ActorVM
+@{
+    var imageUrl = Url.Content(FormatterHelper.GetImageUrl(Model.ImageURL));
+} 
+
+<div>
+    <div class="d-flex justify-content-center mb-4">
+        <img id="form__img" src="@imageUrl"
+             class="rounded-circle" style="width: 180px; height: 180px; object-fit: cover;" alt="example placeholder" />
+    </div>
+    <div class="d-flex justify-content-center">
+        <div data-mdb-ripple-init class="btn btn-primary btn-rounded">
+
+            <label for="form__img-upload" class="text-white m-1">Choose image</label>
+            <input type="file" asp-for="@Model.ProfilePicture" class="form-control d-none" id="form__img-upload" accept=".png, .jpg, .jpeg">
+        </div>
+    </div>
+    <span asp-validation-for="@Model.ProfilePicture" class="text-danger"> </span>
+
+</div>
+
+<div class="py-3">
+    <div class="sign__group">
+        <input type="text" asp-for="@Model.FirstName" class="sign__input" placeholder="First Name">
+        <span asp-validation-for="@Model.FirstName" class="text-danger"> </span>
+
+    </div>
+
+    <div class="sign__group">
+        <input type="text" asp-for="@Model.LastName" class="sign__input" placeholder="Last Name">
+        <span asp-validation-for="@Model.LastName" class="text-danger"> </span>
+
+    </div>
+    <div class="sign__group">
+        <input type="text" asp-for="@Model.Nationality" class="sign__input" placeholder="Nationality">
+        <span asp-validation-for="@Model.Nationality" class="text-danger"> </span>
+
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial.cshtml" />
+}

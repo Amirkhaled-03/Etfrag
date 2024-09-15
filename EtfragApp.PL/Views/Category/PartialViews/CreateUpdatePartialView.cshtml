@@ -1,0 +1,13 @@
+﻿@model CategoryVM
+
+<div class="py-3">
+    <div class="sign__group">
+        <input type="text" asp-for="@Model.CategoryName" class="sign__input" placeholder="Category Name">
+        <span asp-validation-for="@Model.CategoryName" class="text-danger"> </span>
+
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial.cshtml" />
+}

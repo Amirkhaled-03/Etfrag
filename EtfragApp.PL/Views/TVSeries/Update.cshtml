@@ -1,0 +1,191 @@
+﻿@model EditTVSeriesVM;
+
+@{
+    ViewData["Title"] = "Edit TV Series";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    // var actors = new SelectList(ViewBag.Actors, "ActorId", "FullName");
+    // var categories = new SelectList(ViewBag.Categories, "CategoryId", "CategoryName");
+}
+
+<main class="main">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- main title -->
+            <div class="col-12">
+                <div class="main__title">
+                    <h2>Add TV Series</h2>
+                </div>
+            </div>
+            <!-- end main title -->
+            <!-- form -->
+            <div class="col-12">
+                <form asp-action="Update" asp-controller="TVSeries" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-12 col-md-5 form__cover">
+                            <div class="row">
+                                <div class="col-12 col-sm-6 col-md-12">
+                                    <div class="form__img">
+                                        <label for="form__img-upload">Upload Poster (190 x 270)</label>
+                                        <input id="form__img-upload" asp-for="@Model.ThumbnailImage" type="file" accept=".png, .jpg, .jpeg">
+                                        <span asp-validation-for="@Model.ThumbnailImage" class="text-danger"></span>
+                                        <img id="form__img" src="~/Files/Posters/@Model.ThumbnailImageUrl" alt=" ">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-7 form__content">
+                            <div class="row">
+                                <div class="col-8">
+                                    <div class="form__group">
+                                        <input type="text" asp-for="@Model.Title" class="form__input" placeholder="Title">
+                                        <span asp-validation-for="@Model.Title" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-4">
+                                    <div class="form__group">
+
+                                        <div class="form__gallery">
+                                            <label id="gallery1" for="form__gallery-upload">@Model.CoverImageUrl</label>
+                                            <input data-name="#gallery1"
+                                                   id="form__gallery-upload"
+                                                   asp-for="@Model.CoverImage"
+                                                   class="form__gallery-upload"
+                                                   type="file"
+                                                   accept=".png, .jpg, .jpeg"
+                                                   multiple />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form__group">
+                                        <textarea id="text" asp-for="@Model.Description" class="form__textarea" placeholder="Description"></textarea>
+                                        <span asp-validation-for="@Model.Description" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-sm-6 col-lg-3">
+                                    <div class="form__group">
+                                        <input type="text" asp-for="@Model.ReleasYear" class="form__input" placeholder="Release year">
+                                        <span asp-validation-for="@Model.ReleasYear" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-sm-6 col-lg-3">
+                                    <div class="form__group">
+                                        <select class="js-example-basic-single" asp-for="@Model.Quality" id="quality">
+                                            <option value="FullHD">FullHD</option>
+                                            <option value="HD">HD</option>
+                                        </select>
+                                        <span asp-validation-for="@Model.Quality" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-sm-6 col-lg-3">
+                                    <div class="form__group">
+                                        <input type="text" asp-for="@Model.AgeRating" class="form__input" placeholder="Age">
+                                        <span asp-validation-for="@Model.AgeRating" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-sm-6 col-lg-3">
+                                    <div class="form__group">
+                                        <input type="number" asp-for="@Model.Episodes.Count" class="form__input episodies__num" placeholder="Num Of Episodies">
+                                        <span asp-validation-for="@Model.Episodes.Count" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-lg-6">
+                                    <div class="form__group">
+                                        <select class="js-example-basic-multiple" asp-for="@Model.CountryOfOrigin" id="country" multiple="multiple">
+                                            <option value="Egypt">Egypt</option>
+                                        </select>
+                                        <span asp-validation-for="@Model.CountryOfOrigin" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-lg-6">
+                                    <div class="form__group">
+                                        @*     <select class="js-example-basic-multiple" asp-for="@Model.CategoriesIDs" asp-items="categories" id="genre" multiple="multiple">
+                                        </select> *@
+                                        <span asp-validation-for="@Model.CategoriesIDs" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-sm-6 col-lg-4">
+                                    <div class="form__group">
+                                        <input type="text" asp-for="@Model.DirectorName" class="form__input" placeholder="Director">
+                                        <span asp-validation-for="@Model.DirectorName" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-sm-6 col-lg-8">
+                                    <div class="form__group">
+                                        @*   <select class="js-example-basic-multiple" asp-for="@Model.ActorIDs" asp-items="actors" id="actor" multiple="multiple">
+                                        </select> *@
+                                        <span asp-validation-for="@Model.ActorIDs" class="text-danger"></span>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- tv series -->
+                    <div class="col-12">
+                        <div class="">
+                            <!-- season -->
+                            <div class="Season__Episodiess">
+
+                                <br />
+                                <!-- episode -->
+                                @for (int i = 0; i < Model.Episodes.Count; i++)
+                                {
+                                    <div class="sign__episode">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <span class="sign__episode-title text-white">Episode @(i+1) </span>
+                                                <button class="sign__delete" type="button">
+                                                    <i class="fa-solid fa-user text-white"></i>
+                                                </button>
+                                            </div>
+
+                                            <div class="col-12 col-lg-8">
+                                                <div class="form__video">
+                                                    <label id="E\@i" for="form__video-upload\@i">@Model.Episodes[i].EpisodeURL</label>
+                                                    <input data-name="#E\@i" asp-for="@Model.Episodes" id="form__video-upload\@i" class="form__video-upload" type="file">
+                                                    <span class="text-danger"></span>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12 col-lg-4">
+                                                <div class="form__group">
+                                                    <input type="number" class="form__input" asp-for="@(Model.Episodes[i].Duration)"  placeholder="Duration">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                }
+                                <!-- end episode -->
+                            </div>
+                            <!-- end season -->
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="form__btn">Publish</button>
+                        </div>
+                    </div>
+                    <!-- end tv series -->
+                </form>
+            </div>
+            <!-- end form -->
+        </div>
+    </div>
+</main>
+
+
+
+
